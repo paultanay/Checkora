@@ -30,7 +30,27 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-dev-key-for-local-tes
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS = ['.vercel.app', '*']
+# Strict host validation to prevent Host Header Poisoning.
+# See: https://docs.djangoproject.com/en/6.0/ref/settings/#allowed-hosts
+ALLOWED_HOSTS = [
+    'checkora.vercel.app',
+    'checkora.com',
+    'www.checkora.com',
+    'localhost',
+    '127.0.0.1',
+]
+
+# CSRF protection requires explicit origins for secure requests.
+# See: https://docs.djangoproject.com/en/6.0/ref/settings/#csrf-trusted-origins
+CSRF_TRUSTED_ORIGINS = [
+    'https://checkora.vercel.app',
+    'https://checkora.com',
+    'https://www.checkora.com',
+]
+
+# Allow Vercel preview deployments by matching subdomains in ALLOWED_HOSTS.
+if not DEBUG:
+    ALLOWED_HOSTS.append('.vercel.app')
 
 
 # Application definition
