@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "installCommand": "echo 'Python deps handled by runtime'",
-  "buildCommand": "python3 build_vercel.py",
+  "installCommand": "python -m pip install -r requirements.txt",
+  "buildCommand": "python build_vercel.py",
   "outputDirectory": "public",
 
   "functions": {
