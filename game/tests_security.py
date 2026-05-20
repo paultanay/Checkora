@@ -92,7 +92,6 @@ class SecurityHostHeaderTest(TestCase):
         Ensures that broad wildcard patterns (like .vercel.app) are not 
         accidentally active in the default test/production configuration.
         """
-        broad_wildcards = [h for h in settings.ALLOWED_HOSTS if h.startswith('.')]
         if getattr(settings, 'VERCEL_ENV', None) != 'preview':
             self.assertNotIn(
                 '.vercel.app', 
